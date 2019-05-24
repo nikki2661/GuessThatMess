@@ -124,15 +124,37 @@ public class MainActivity extends AppCompatActivity {
         builder.show();
     }
 
-    private void resetView() {
+   private void resetView() {
         mainView.setBackgroundColor(Color.WHITE);
-        doodleCanvas.clear();
+        paintView.clear();
         textViewResult.setText("");
-
-        // get a random label and set as expected class
-        classifier.setExpectedIndex(new Random().nextInt(classifier.getNumberOfClasses()));
-        textViewDraw.setText("Doodle ... " + classifier.getLabel(classifier.getExpectedIndex()));
+        ArrayList<Integer> p = new ArrayList<>();
+       //subset of labels for testing on the model trained with part of the quickdraw data set
+        p.add(59);
+        p.add(50);
+        p.add(36);
+        p.add(64);
+        p.add(54);
+        p.add(71);
+        p.add(14);
+        p.add(77);
+        p.add(85);
+        p.add(99);
+        p.add(20);
+        p.add(34);
+        p.add(66);
+        p.add(69);
+        p.add(75);
+        p.add(82);
+        p.add(124);
+        //int[]p=new int[]{59,36,64,54,71,14,77,85,7,99,50};
+       Random rand = new Random();
+        int r = p.get(rand.nextInt(p.size()));
+        //classifier.setExpectedIndex(new Random().nextInt(classifier.getNumberOfClasses()));
+        classifier.setExpectedIndex(r);
+        textViewDraw.setText("Draw ... " + classifier.getLabel(classifier.getExpectedIndex()));
 
     }
+
 
 }
