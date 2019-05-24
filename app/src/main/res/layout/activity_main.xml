@@ -24,7 +24,7 @@
         android:layout_alignParentLeft="true"
         android:background="#851AA85A"
         android:onClick="onDetectClick"
-        android:text="Detect" />
+        android:text="Guess" />
 
     <Button
         android:id="@+id/btn_next"
@@ -46,7 +46,7 @@
         android:layout_alignParentBottom="true"
         android:background="#E6C77C"
         android:onClick="onClearClick"
-        android:text="Clear Paint" />
+        android:text="Clear" />
 
     <TextView
         android:id="@+id/txt_draw_label"
@@ -72,6 +72,6 @@
         android:background="#00FFFBFB"
         android:fontFamily="monospace"
         android:text="TextView"
-        android:textSize="15sp"
+        android:textSize="17sp"
         tools:visibility="visible" />
 </RelativeLayout>
