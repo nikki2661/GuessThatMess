@@ -146,13 +146,12 @@ public class MainActivity extends AppCompatActivity {
         p.add(69);
         p.add(75);
         p.add(82);
-        p.add(124);
         //int[]p=new int[]{59,36,64,54,71,14,77,85,7,99,50};
        Random rand = new Random();
         int r = p.get(rand.nextInt(p.size()));
         //classifier.setExpectedIndex(new Random().nextInt(classifier.getNumberOfClasses()));
         classifier.setExpectedIndex(r);
-        textViewDraw.setText("Draw ... " + classifier.getLabel(classifier.getExpectedIndex()));
+        textViewDraw.setText("Can you Doodle ... " + classifier.getLabel(classifier.getExpectedIndex())+"?");
 
     }
 
