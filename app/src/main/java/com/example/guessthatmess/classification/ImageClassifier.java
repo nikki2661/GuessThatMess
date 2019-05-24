@@ -15,8 +15,8 @@ import java.util.ArrayList;
 
 public class ImageClassifier {
 
-    private static final String MODEL_FILE = "model345.tflite";
-    private static final String LABELS_FILE = "labels.csv";
+    private static final String MODEL_FILE = "model100.tflite";
+    private static final String LABELS_FILE = "labels100.csv";
 
     private static final int DIM_BATCH_SIZE = 1;
     public static final int DIM_IMG_SIZE_HEIGHT = 28;
