@@ -126,7 +126,7 @@ public class MainActivity extends AppCompatActivity {
 
    private void resetView() {
         mainView.setBackgroundColor(Color.WHITE);
-        paintView.clear();
+        doodleCanvas.clear();
         textViewResult.setText("");
         ArrayList<Integer> p = new ArrayList<>();
        //subset of labels for testing on the model trained with part of the quickdraw data set
