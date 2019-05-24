@@ -69,9 +69,9 @@
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="105dp"
-        android:background="#00FFFBFB"
         android:fontFamily="monospace"
         android:text="TextView"
+        android:textColor="#FFFFFFFF"
         android:textSize="17sp"
         tools:visibility="visible" />
 </RelativeLayout>
