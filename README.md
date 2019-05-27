@@ -55,7 +55,7 @@ import tflite and other dependencies into build.grade file
 
 
 
-To Do: add timer, score, add more categories
+Possible Extensions: add timer, score, add more categories
 
 
 Tools Used: Java, Android Studio, Tensorflow Lite, Quick Draw Data Set (labels), Github (inspired by many repositories), Google documentation, Stack Overflow
