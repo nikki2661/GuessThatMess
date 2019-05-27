@@ -6,6 +6,7 @@ Guess that Mess: An Android App using Machine Learning for Classifying Doodles W
 Problem: Trying to get the user to draw a doodle and get the computer to try (using machine learning) to guess what is drawn
 
 Instructions:
+
 Download Android Studio 
 Create a new project with the language option Java (make sure it is an empty activity)
 Name your project (Guess that mess)
