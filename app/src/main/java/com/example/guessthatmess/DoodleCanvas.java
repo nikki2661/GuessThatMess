@@ -24,8 +24,8 @@ public class DoodleCanvas extends View {
 
 
     public static int BRUSH_SIZE = 20;
-    public static final int DEFAULT_COLOR = Color.BLACK;
-    public static final int DEFAULT_BG_COLOR = Color.WHITE;
+    public static final int DEFAULT_COLOR = Color.WHITE;
+    public static final int DEFAULT_BG_COLOR = Color.BLACK;
     private static final float TOUCH_TOLERANCE = 4;
 
     // original size of PaintView
