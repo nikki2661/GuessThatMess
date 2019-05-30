@@ -17,16 +17,21 @@ Go to App -> Src -> Main
 
 Go to Android Mainfest xml (main top level file that holds all information about the project)
 
-Activity_main xml = defines layout of app, under resources and layout (res -> layout)
+Activity_main xml = defines layout of app, under resources and layout (res -> layout) - it includes the canvas, guess button, clear button, and next doodle button.
+Activity_signup.xml = the first page seen when the app is opened - either log in or sign up and then start the game
+Activity_signupverify.xml = the page seen when the button "Sign up" is clicked. There you can sign up with a username and password and then start the game
 
-
-Under Java are the three following files and a classifier folder:
+Under Java are the five following files and a classifier folder:
 
 MainActivity = main class, where onClick methods are executed 
 
 DoodleCanvas = canvas class for drawing images
 
 Stroke = set size for drawing path made by user
+
+SignUpActivity = includes login button, signup button, and takes you to the layout when those buttons are pressed
+
+SignUpVerify = Verifies you have a valid username and password
 
 Under the Classifier folder:
 
@@ -62,7 +67,7 @@ import tflite and other dependencies into build.grade file
 
 
 
-Possible Extensions: add timer, score, add more categories
+Possible Extensions: add more categories, add sounds (for incorrect or correct guesses), show what your doodle is compared to the tensorflow model's idea of the doodle
 
 Tools Used: Java, Android Studio, Tensorflow Lite, Quick Draw Data Set (labels), Github (inspired by many repositories), Google documentation, Stack Overflow, YouTube
 
