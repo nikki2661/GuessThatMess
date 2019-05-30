@@ -62,9 +62,9 @@ import tflite and other dependencies into build.grade file
 
 # Preview:
 
-![Incorrect Guess](/IncorrectGuess.png?raw=true "Incorrect Guess")
+![Incorrect Guess](/Incorrect.png?raw=true "Incorrect Guess")
 
-![Correct Guess](/CorrectGuess.png?raw=true "Correct Guess")
+![Correct Guess](/Correct.png?raw=true "Correct Guess")
 
 
 
