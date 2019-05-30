@@ -61,6 +61,7 @@ Create menu folder (menu item for home, dashboard, and notifications)
 import tflite and other dependencies into build.grade file
 
 # Preview:
+![Default](/Default.png?raw=true "Default")
 
 ![Incorrect Guess](/IncorrectGuess.png?raw=true "Incorrect Guess")
 
