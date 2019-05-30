@@ -1,22 +1,28 @@
 package com.example.guessthatmess;
-
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.opengl.Visibility;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.os.CountDownTimer;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 
 import java.io.IOException;
+import java.lang.reflect.Array;
+import java.util.ArrayList;
 import java.util.Random;
 
 import com.example.guessthatmess.classification.ImageClassifier;
@@ -26,12 +32,21 @@ import com.example.guessthatmess.classification.Result;
 public class MainActivity extends AppCompatActivity {
 
     private View mainView;
+    private int userscore;
+    private int compscore;
     private DoodleCanvas doodleCanvas; // custom drawing view
     private ImageClassifier classifier; // complete image classification
+    public int counter;
+    private CountDownTimer mCountDownTimer;
+
 
     TextView textViewResult;
     TextView textViewDraw;
-
+    TextView textTimerShow;
+    Button   btn_detect;
+    Button   btn_clear;
+    Button   btn_next;
+    Animation animBlink;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,6 +57,12 @@ public class MainActivity extends AppCompatActivity {
 
         textViewResult = (TextView) findViewById(R.id.txt_result_label);
         textViewDraw = (TextView) findViewById(R.id.txt_draw_label);
+        textTimerShow = (TextView) findViewById(R.id.txt_timer_label);
+        btn_detect = (Button) findViewById(R.id.btn_detect);
+        btn_clear = (Button) findViewById(R.id.btn_clear3);
+        btn_next = (Button) findViewById(R.id.btn_next);
+        animBlink = AnimationUtils.loadAnimation(getApplicationContext(),
+                R.anim.blink);
 
 
         // instantiate classifier
@@ -54,8 +75,43 @@ public class MainActivity extends AppCompatActivity {
 
         this.mainView = this.findViewById(R.id.activity_main).getRootView();
 
+
         resetView();
+        //mCountDownTimer = this.createTimer();
     }
+
+
+
+
+
+    private CountDownTimer createTimer(){
+        return new CountDownTimer(10000, 1000) {
+
+            public void onTick(long millisUntilFinished) {
+
+                textTimerShow.setText("Timer:" +String.valueOf(counter));
+                textTimerShow.startAnimation(animBlink);
+                counter++;
+            }
+
+            public void onFinish() {
+                textTimerShow.setText("Time is up!!");
+                textTimerShow.clearAnimation();
+                counter=0;
+                //paintView.clear();
+                //textViewDraw.setText("");
+                btn_detect.setVisibility(View.INVISIBLE);
+                btn_clear.setVisibility(View.INVISIBLE);
+                btn_next.setVisibility(View.VISIBLE);
+
+
+
+                //resetView();
+            }
+
+        }.start();
+    }
+
 
 
     public void onClearClick(View view) {
@@ -71,37 +127,78 @@ public class MainActivity extends AppCompatActivity {
             return;
         }
 
+
         Bitmap sketch = doodleCanvas.getNormalizedBitmap(); // get resized bitmap
 
         //showImage(paintView.scaleBitmap(40, sketch));
 
         // create the result
         Result result = classifier.classify(sketch);
+        int expectedIndex = classifier.getExpectedIndex();
+
 
         // render results
-        textViewResult.setText("");
-        for (int index : result.getTopK()) {
+        textViewResult.setText("Top 3 Guesses:\n");
+        for (int index : result.getTopK())
             textViewResult.setText(
                     textViewResult.getText()
-                            +"\n"
+
                             +classifier.getLabel(index)
                             + " ("
                             + String.format("%.02f", classifier.getProbability(index) * 100)
                             + "%)"
+                            + " | "
             );
-        }
 
-        int expectedIndex = classifier.getExpectedIndex();
+
+        //int expectedIndex = classifier.getExpectedIndex();
         if (result.getTopK().contains(expectedIndex)) {
+            userscore++;
+            textViewResult.append("\nYay! Our brains are synced up");
+            textViewResult.append("\nUser score is: " + userscore +" and");
+            if(userscore<compscore)
+            {
+                textViewResult.append("\tUser is behind by " + (compscore-userscore));
+            }
+            if(userscore>compscore)
+            {
+                textViewResult.append("\tUser is leading by " + (userscore-compscore));
+            }
+            if(userscore==compscore)
+            {
+                textViewResult.append("\tUser is tied with the Computer");
+            }
+
             mainView.setBackgroundColor(Color.rgb(78,175,36));
         } else {
+            compscore++;
+            textViewResult.append("\nTry Again! I don't understand this art yet.");
+            textViewResult.append("\nComputer score is: " + compscore + " and");
+            if(userscore==compscore)
+            {
+                textViewResult.append("\tComputer is tied with the User");
+            }
+            if(compscore>userscore)
+            {
+                textViewResult.append("\tComputer is leading by " + (compscore-userscore) );
+            }
+            if(compscore<userscore)
+            {
+                textViewResult.append("\tComputer is behind by " + (userscore-compscore));
+            }
             mainView.setBackgroundColor(Color.rgb(204, 0,0));
         }
 
+
     }
 
+
     public void onNextClick(View view) {
+        mCountDownTimer.cancel();
+        btn_detect.setVisibility(View.VISIBLE);
+        btn_clear.setVisibility(View.VISIBLE);
         resetView();
+        //mCountDownTimer = this.createTimer();
     }
 
     // debug: ImageView with rescaled 28x28 bitmap
@@ -124,12 +221,17 @@ public class MainActivity extends AppCompatActivity {
         builder.show();
     }
 
-   private void resetView() {
+
+
+
+
+    private void resetView(){
+        btn_next.setVisibility(View.INVISIBLE);
         mainView.setBackgroundColor(Color.WHITE);
         doodleCanvas.clear();
         textViewResult.setText("");
-        ArrayList<Integer> p = new ArrayList<>();
-       //subset of labels for testing on the model trained with part of the quickdraw data set
+        textTimerShow.setText("");
+        ArrayList<Integer> p=new ArrayList<>();
         p.add(59);
         p.add(50);
         p.add(36);
@@ -144,16 +246,25 @@ public class MainActivity extends AppCompatActivity {
         p.add(34);
         p.add(66);
         p.add(69);
+        p.add(13);
+        p.add(45);
+        p.add(97);
         p.add(75);
         p.add(82);
         //int[]p=new int[]{59,36,64,54,71,14,77,85,7,99,50};
-       Random rand = new Random();
-        int r = p.get(rand.nextInt(p.size()));
+        Random rand=new Random();
+        int r=p.get(rand.nextInt(p.size()));
+
         //classifier.setExpectedIndex(new Random().nextInt(classifier.getNumberOfClasses()));
         classifier.setExpectedIndex(r);
-        textViewDraw.setText("Can you Doodle ... " + classifier.getLabel(classifier.getExpectedIndex())+"?");
+        textViewDraw.setText("Doodle under 10 seconds and let the computer make a guess.\n Draw ... "
+                + classifier.getLabel(classifier.getExpectedIndex()));
+
+        mCountDownTimer = this.createTimer();
+
 
     }
+
 
 
 }
