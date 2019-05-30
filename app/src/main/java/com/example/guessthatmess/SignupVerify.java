@@ -51,7 +51,7 @@ public class SignupVerify extends AppCompatActivity
 
                    // Toast.makeText(getApplication(),input,Toast.LENGTH_LONG).show();
 
-                    Intent intent= new Intent(getApplication(), MainActivity.class);
+                    Intent intent= new Intent(getApplication(), SignupActivity.class);
                     startActivity(intent);
                 }
 
