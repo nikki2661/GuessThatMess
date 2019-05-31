@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#7E1FC3D8"
+    android:background="#FFC107"
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
@@ -11,13 +11,13 @@
 
     <ImageView
         android:id="@+id/imageView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
+        android:layout_width="395dp"
+        android:layout_height="374dp"
         android:paddingLeft="16dp"
         android:paddingTop="16dp"
         android:paddingRight="16dp"
         android:paddingBottom="16dp"
+        android:layout_centerHorizontal="true"
         android:src="@drawable/logopic" />
 
 
@@ -26,7 +26,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/imageView"
-        android:layout_marginTop="91dp"
+        android:layout_marginTop="-59dp"
         android:hint="Username" />
 
     <EditText
@@ -44,6 +44,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/password_id"
         android:layout_marginTop="29dp"
+        android:backgroundTint="#DDDCD9"
         android:text="Login" />
 
     <Button
@@ -52,16 +53,17 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/login_id"
         android:layout_marginTop="21dp"
+        android:backgroundTint="#DDDCD9"
         android:text="Sign Up" />
 
-    <TextView
+    <!--<TextView
         android:id="@+id/Introtext"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="220dp"
         android:fontFamily="casual"
         android:text="Create a doodle in under 10 seconds and let the Computer make a guess!"
-        android:textSize="20sp" />
+        android:textSize="20sp" />-->
 
 
 </RelativeLayout>
